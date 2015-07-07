@@ -166,7 +166,7 @@ class CWS_Markdown {
         $data['post_content'] = addslashes( $post['post_content_filtered'] );
       }
       $data['post_content_filtered'] = $data['post_content'];
-      $data['post_content'] = addslashes( $this->unp( $this->markdown->convertToHtml( stripslashes( $data['post_content'] ) ) ) );
+      $data['post_content'] = $this->markdown->convertToHtml( $data['post_content'] );
       if ( $this->kses )
         $data['post_content'] = wp_kses_post( $data['post_content'] );
       if ( $postarr['ID'] )
