@@ -8,6 +8,6 @@
   "require": {
     "php": ">=5.4.0",
     "composer/installers": "~1.0.12",
-    "league/commonmark": "0.7.*"
+    "league/commonmark": "0.13.*"
   }
 }
