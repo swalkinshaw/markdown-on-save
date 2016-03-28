@@ -8,6 +8,7 @@
   "require": {
     "php": ">=5.4.0",
     "composer/installers": "~1.0.12",
-    "league/commonmark": "0.13.*"
+    "league/commonmark": "0.13.*",
+    "webuni/commonmark-table-extension": "^0.4.3"
   }
 }

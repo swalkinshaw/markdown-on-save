@@ -12,6 +12,8 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 
 use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment;
+use Webuni\CommonMark\TableExtension\TableExtension;
 
 class CWS_Markdown {
   const PM = '_cws_is_markdown';
@@ -25,7 +27,10 @@ class CWS_Markdown {
   var $monitoring_for_insert_post_child = array();
 
   public function __construct() {
-    $this->markdown = new CommonMarkConverter();
+    $environment = Environment::createCommonMarkEnvironment();
+    $environment->addExtension(new TableExtension());
+    $this->markdown = new CommonMarkConverter([], $environment);
+
     $this->instance =& $this;
     add_action( 'init', array( $this, 'init' ) );
   }
