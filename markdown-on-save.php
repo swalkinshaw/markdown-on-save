@@ -12,6 +12,7 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 
 use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment;
 
 class CWS_Markdown {
   const PM = '_cws_is_markdown';
@@ -25,12 +26,16 @@ class CWS_Markdown {
   var $monitoring_for_insert_post_child = array();
 
   public function __construct() {
-    $this->markdown = new CommonMarkConverter();
     $this->instance =& $this;
     add_action( 'init', array( $this, 'init' ) );
   }
 
   public function init() {
+    $this->markdown = new CommonMarkConverter(
+        apply_filters('cws_markdown_config', []),
+        apply_filters('cws_markdown_environment', Environment::createCommonMarkEnvironment())
+    );
+
     load_plugin_textdomain( 'markdown-on-save', NULL, basename( dirname( __FILE__ ) ) );
     add_filter( 'wp_insert_post_data', array( $this, 'wp_insert_post_data' ), 10, 2 );
     // add_action( 'do_meta_boxes', array( $this, 'do_meta_boxes' ), 20, 2 );
